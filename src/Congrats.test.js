@@ -1,10 +1,15 @@
 import React from 'react';
+
 import Enzyme, { shallow } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16'
+
 import Congrats from './Congrats';
 
-import { findByTestAttr } from '../test/testUtils'
+import { findByTestAttr, checkProps } from '../test/testUtils'
 
+Enzyme.configure({ adapter: new EnzymeAdapter()});
+
+const defaultProps = { success: false };
 
 /**
  * 
@@ -13,12 +18,12 @@ import { findByTestAttr } from '../test/testUtils'
  */
 
 const setup = (props={}) => {
-  return shallow(<Congrats {...props} />);
+  const setupProps = {...defaultProps, ...props};
+  return shallow(<Congrats {...setupProps} />);
 }
 
 
 
-Enzyme.configure({ adapter: new EnzymeAdapter()});
 
 
 it('renders without error', () => {
@@ -30,7 +35,7 @@ it('renders without error', () => {
 
 //have to be explicit about what the success prop is
 it('renders no text when `success` prop is false', () => {
-  const wrapper = setup({success: false});
+  const wrapper = setup();
   const component = findByTestAttr(wrapper, "component-congrats");
 
   expect(component.text()).toBe('');
@@ -41,4 +46,16 @@ it('renders non-empty congrats msg when the `success` prop is true', () => {
   const message = findByTestAttr(wrapper, "congrats-message"); 
   
   expect(message.text().length).not.toBe(0);
+});
+
+
+//BELOW IS A PROPTYPES TYPE CHECKING TEST WITH CHECKPROPTYPES MODULE
+it('does not throw warning with expected props', () => {
+  const expectedProps = { success: false };
+  // //here we use the check-prop-types dev dependency
+  // //below is how it works - checkPropTypes takes two arguments, the components proptypes object, and the props that you want to test
+  // //now the error will get returned as data binding propError instead of a console.warn
+  // const propError = checkPropTypes(Congrats.propTypes, expectedProps, 'prop', Congrats.name);
+  // expect(propError).toBeUndefined();
+  checkProps(Congrats, expectedProps);
 });
