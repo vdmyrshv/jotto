@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Congrats from './Congrats';
+import GuessedWords from './GuessedWords'
 
 import './App.css';
 
-function App() {
-  return (
-    <div data-test="App">
+class App extends Component {
 
-    </div>
-  );
+  state = {
+    guessedWords: []
+  }
+  
+  render() {
+    return (
+      <div data-test="App">
+        <GuessedWords {...this.state}/>
+      </div>
+    );
+  }
 }
 
 export default App;

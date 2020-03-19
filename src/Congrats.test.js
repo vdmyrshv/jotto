@@ -1,18 +1,18 @@
 import React from 'react';
 
-import Enzyme, { shallow } from 'enzyme';
-import EnzymeAdapter from 'enzyme-adapter-react-16'
+import { shallow } from 'enzyme';
+//import EnzymeAdapter from 'enzyme-adapter-react-16' <<< this is now in setupTest.js
 
 import Congrats from './Congrats';
 
 import { findByTestAttr, checkProps } from '../test/testUtils'
 
-Enzyme.configure({ adapter: new EnzymeAdapter()});
+//Enzyme.configure({ adapter: new EnzymeAdapter()}); <<< this is now in setupTest.js
 
 const defaultProps = { success: false };
 
 /**
- * 
+ * @function setup
  * @param {object} props - component props specific to this setup
  * @returns {shallowWrapper}
  */
