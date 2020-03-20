@@ -8,12 +8,18 @@ import './App.css';
 class App extends Component {
 
   state = {
-    guessedWords: []
+    guessedWords: [
+      {guessedWord: 'train', letterMatchCount: 3},
+      {guessedWord: 'agile', letterMatchCount: 1},
+      {guessedWord: 'party', letterMatchCount: 5},
+    ],
+    success: true
   }
   
   render() {
     return (
       <div data-test="App">
+        <Congrats success={this.state.success}/>
         <GuessedWords {...this.state}/>
       </div>
     );
