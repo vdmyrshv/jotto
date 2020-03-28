@@ -18,8 +18,6 @@ const Congrats = ({success})=> {
     } else {
         return (
             <div data-test="component-congrats">
-                <h1>Jotto</h1>
-                <h2>Try to guess the secret word</h2>
             </div>
         )
     }
